@@ -18,15 +18,25 @@ namespace ParaphernaliaArchive.Models
                 return;
             }
 
-            var item = new Item
+            var items = new List<Item>()
             {
-                Title = "Broom",
-                Description = "For sweeping",
-                DateAcquired = DateTime.Now,
-                ExpirationDate = DateTime.MaxValue
+                new Item
+                {
+                    Title = "Broom",
+                    Description = "For sweeping",
+                    DateAcquired = DateTime.Now,
+                    ExpirationDate = DateTime.MaxValue
+                },
+                new Item
+                {
+                    Title = "Shovel",
+                    Description = "For digging",
+                    DateAcquired = DateTime.Now,
+                    ExpirationDate = DateTime.MaxValue
+                }
             };
 
-            context.Items.Add(item);
+            context.Items.AddRange(items);
 
             context.SaveChanges();
         }
