@@ -37,5 +37,47 @@ namespace ParaphernaliaArchive.Controllers
 
             return RedirectToAction("Index");
         }
+
+        //[HttpGet("{id}")]
+        public IActionResult Edit(int id)
+        {
+            Item existingItem = new Item();
+
+            if (_context.Items.Where(m => m.Id == id).Any())
+            {
+                existingItem = _context.Items.Where(m => m.Id == id).FirstOrDefault();
+            }
+
+            return View(existingItem);
+        }
+
+        [HttpPost, ActionName("Edit")]
+        [ValidateAntiForgeryToken]
+        public IActionResult Edit(Item item)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Entry(item).State = EntityState.Modified;
+                _context.SaveChanges();
+
+                return RedirectToAction("Index");
+            }
+
+            return View(item);
+        }
+
+
+        [HttpGet]
+        public IActionResult Details(int id)
+        {
+            Item existingItem = new Item();
+
+            if (_context.Items.Where(m => m.Id == id).Any())
+            {
+                existingItem = _context.Items.Where(m => m.Id == id).FirstOrDefault();
+            }
+
+            return View(existingItem);
+        }
     }
 }
