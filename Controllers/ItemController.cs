@@ -79,5 +79,21 @@ namespace ParaphernaliaArchive.Controllers
 
             return View(existingItem);
         }
+
+        [HttpGet]
+        public IActionResult Delete(int id)
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult DeleteConfirmed(int id)
+        {
+            var item = new Item { Id = id };
+            _context.Entry(item).State = EntityState.Deleted;
+            _context.SaveChanges();
+
+            return RedirectToAction("Index");
+        }
     }
 }
